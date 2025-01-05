@@ -25,7 +25,7 @@ const imagekit=new ImageKit({
     publicKey:process.env.VITE_IMAGE_KIT_PUBLIC_KEY,
     privateKey:process.env.VITE_IMAGE_KIT_PRIVATE_KEY
 })
-app.get('/api/', (req, res) => {
+app.get('/', (req, res) => {
     res.json({ message: 'API Version 1' });
   });
 app.get('/api/upload',(req,res)=>{
