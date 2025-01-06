@@ -17,14 +17,14 @@ app.use(express.json())
 const Dbconnect=async()=>{
  try {
     await mongoose.connect(process.env.MONGODB_URL)
-    console.log("mongodb Connected successfully")
+    console.log("mongodb Connection successfull")
  } catch (error) {
     console.log(error)
  }
 } 
-app.use(express.static(path.join(__dirname,"../client")))
-const __filename=url.fileURLToPath(process.env.CLIENT_URL)
+const __filename = url.fileURLToPath(import.meta.url);
 const __dirname=path.dirname(__filename)
+app.use(express.static(path.join(__dirname,"../client")))
 const imagekit=new ImageKit({
     urlEndpoint:process.env.VITE_IMAGE_KIT_ENDPOINT,
     publicKey:process.env.VITE_IMAGE_KIT_PUBLIC_KEY,
