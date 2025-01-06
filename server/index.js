@@ -23,15 +23,15 @@ const Dbconnect=async()=>{
  }
 } 
 const myfilename = url.fileURLToPath(new URL(process.env.CLIENT_URL));
-const __dirname=path.dirname(myfilename)
-app.use(express.static(path.join(__dirname,"../client")))
+const mydirname=path.dirname(myfilename)
+app.use(express.static(path.join(mydirname,"../client")))
 const imagekit=new ImageKit({
     urlEndpoint:process.env.VITE_IMAGE_KIT_ENDPOINT,
     publicKey:process.env.VITE_IMAGE_KIT_PUBLIC_KEY,
     privateKey:process.env.VITE_IMAGE_KIT_PRIVATE_KEY
 })
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,"../client",'index.html'))
+    res.sendFile(path.join(mydirname,"../client",'index.html'))
   });
 app.get('/api/upload',(req,res)=>{
     const result=imagekit.getAuthenticationParameters()
