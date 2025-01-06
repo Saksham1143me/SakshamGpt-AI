@@ -22,8 +22,8 @@ const Dbconnect=async()=>{
     console.log(error)
  }
 } 
-const __filename = url.fileURLToPath(new URL(process.env.CLIENT_URL));
-const __dirname=path.dirname(__filename)
+const myfilename = url.fileURLToPath(new URL(process.env.CLIENT_URL));
+const __dirname=path.dirname(myfilename)
 app.use(express.static(path.join(__dirname,"../client")))
 const imagekit=new ImageKit({
     urlEndpoint:process.env.VITE_IMAGE_KIT_ENDPOINT,
