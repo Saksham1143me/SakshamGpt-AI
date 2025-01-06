@@ -3,10 +3,12 @@ const ImageKit = require('imagekit')
 const PORT=process.env.PORT || 3000
 const app=express()
 const cors=require('cors')
+const url=require('url')
 const { default: mongoose } = require('mongoose')
 const Chat  = require('./models/chat')
 const UserChats = require('./models/userChats')
 const { ClerkExpressRequireAuth } =require('@clerk/clerk-sdk-node')
+const path = require('path')
 app.use(cors({
     origin:process.env.CLIENT_URL,
     credentials:true
@@ -20,13 +22,16 @@ const Dbconnect=async()=>{
     console.log(error)
  }
 } 
+app.use(express.static(path.join(__dirname,"../client")))
+const __filename=url.fileURLToPath(process.env.CLIENT_URL)
+const __dirname=path.dirname(__filename)
 const imagekit=new ImageKit({
     urlEndpoint:process.env.VITE_IMAGE_KIT_ENDPOINT,
     publicKey:process.env.VITE_IMAGE_KIT_PUBLIC_KEY,
     privateKey:process.env.VITE_IMAGE_KIT_PRIVATE_KEY
 })
-app.get('/', (req, res) => {
-    res.json({ message: 'API Version 1' });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,"../client",'index.html'))
   });
 app.get('/api/upload',(req,res)=>{
     const result=imagekit.getAuthenticationParameters()
