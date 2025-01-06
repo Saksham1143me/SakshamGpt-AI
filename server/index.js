@@ -16,13 +16,13 @@ app.use(cors({
 app.use(express.json())
 const Dbconnect=async()=>{
  try {
-    await mongoose.connect(new URL(process.env.MONGODB_URL))
+    await mongoose.connect(process.env.MONGODB_URL)
     console.log("mongodb Connection successfull")
  } catch (error) {
     console.log(error)
  }
 } 
-const __filename = url.fileURLToPath(import.meta.CLIENT_URL);
+const __filename = url.fileURLToPath(new URL(process.env.CLIENT_URL));
 const __dirname=path.dirname(__filename)
 app.use(express.static(path.join(__dirname,"../client")))
 const imagekit=new ImageKit({
