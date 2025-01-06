@@ -22,7 +22,7 @@ const Dbconnect=async()=>{
     console.log(error)
  }
 } 
-const __filename = url.fileURLToPath(import.meta.url);
+const __filename = url.fileURLToPath(import.meta.CLIENT_URL);
 const __dirname=path.dirname(__filename)
 app.use(express.static(path.join(__dirname,"../client")))
 const imagekit=new ImageKit({
